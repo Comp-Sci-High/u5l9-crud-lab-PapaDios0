@@ -26,10 +26,22 @@ const Country = mongoose.model("Country", countrySchema, "Countries");
 
 // Create a POST route for "/add/country" that adds a country using the request body (3 points)
 // Use postman to add at least THREE different countries
-
+app.post("/add/country", async (req, res) =>{
+  const location = await new Country  ({
+    country: req.body.country,
+    flagURL: req.body.flagURL,
+    population: req.body.population,
+    officialLanguage: req.body.officialLanguage,
+    hasNuclearWeapons: req.body.hasNuclearWeapons,
+  }).save()
+  res.json(location)
+})
 
 // Create a GET route for "/" that renders countries.ejs with every country from the Countries collection (1 point)
-
+app.get("/", async (req, res) => {
+  const location2 = await Country.find({})
+  res.render("countries.ejs", {location})
+})
 
 // Go to countries.ejs and follow the tasks there (2 points)
 
@@ -46,7 +58,7 @@ const Country = mongoose.model("Country", countrySchema, "Countries");
 async function startServer() {
   
     // add your SRV string with a database called countries
-  await mongoose.connect("...");
+  await mongoose.connect("mongodb+srv://SE12:CSH2025@cluster0.mwpww.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
 
   app.listen(3000, () => {
     console.log("Server is running");
