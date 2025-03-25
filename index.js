@@ -40,7 +40,7 @@ app.post("/add/country", async (req, res) =>{
 // Create a GET route for "/" that renders countries.ejs with every country from the Countries collection (1 point)
 app.get("/", async (req, res) => {
   const location2 = await Country.find({})
-  res.render("countries.ejs", {location})
+  res.render("countries.ejs", {location2})
 })
 
 // Go to countries.ejs and follow the tasks there (2 points)
